@@ -1,22 +1,27 @@
 mod rebalance_logic;
 mod term_ui;
 
-#[derive(Hash, Eq, PartialEq, Debug, Clone)]
-struct stonk {
-    name: String,
-    price: f32,
-    shares: f32,
-    type_category: String,
-}
+/*
+Uses the Swensen Model for Asset Allocation
+*/
 
 fn main() {
+    println!("================================================================");
     println!("Type in Stonk Symbol and Amount of Shares");
-    println!("=========================================");
-    print!("Example: \t");
-    println!("\"> PFE 1.54\"");
-    println!("=========================================");
+    println!("\"> [STOCK_SYM] [AMT_OF_SHARES]\t\"");
+    println!("================================================================");
+    print!("Examples:\n");
+    println!("\t \"> PFE 1.54\t\t\"");
+    println!("\t \"> ibM 6 \t\t\"");
+    println!("\t \"> qqq 7.50\t\t\"");
+    println!("");
+    println!("When done type \"X X\", currently everything else will panic :)");
+    println!("================================================================");
+    
     
     let text = term_ui::entry();
     println!("{}", text);
-    println!("{}",rebalance_logic::finance::total_value(text));
+
+    //rebalance_logic::finance::core_logic(text);
+    // println!("Total = {}",rebalance_logic::finance::total_value(text, true));
 }
