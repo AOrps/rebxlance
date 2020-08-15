@@ -31,8 +31,3 @@ pub fn entry() ->String{
     }
     return base_string;
 }
-
-
-
-
-

@@ -3,6 +3,7 @@ mod term_ui;
 
 /*
 Uses the Swensen Model for Asset Allocation
+Doesn't have stocks that don't exist and will almost certainly panic and crash.
 */
 
 fn main() {
@@ -21,6 +22,15 @@ fn main() {
     
     let text = term_ui::entry();
     println!("{}", text);
+
+    // let fast = text.clone();
+
+    let asset = rebalance_logic::finance::core_logic(text);
+
+    asset.print_all_values();
+
+    rebalance_logic::finance::rebxlance(asset);
+
 
     //rebalance_logic::finance::core_logic(text);
     // println!("Total = {}",rebalance_logic::finance::total_value(text, true));
