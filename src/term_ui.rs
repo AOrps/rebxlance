@@ -1,3 +1,4 @@
+use std::io;
 use std::io::{stdin, stdout, Write};
 
 pub fn entry() ->String{
@@ -30,4 +31,15 @@ pub fn entry() ->String{
         println!("{} and {}", first,second);
     }
     return base_string;
+}
+
+pub fn enter_contribution() ->String {
+    println!("Enter contribution amount\n$ ");
+    let mut amt = String::new();
+
+    io::stdin()
+        .read_line(&mut amt)
+        .expect("Failed to read \'Contribution Amount\'");
+    
+    return amt;
 }

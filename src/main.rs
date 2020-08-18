@@ -27,9 +27,11 @@ fn main() {
 
     let asset = rebalance_logic::finance::core_logic(text);
 
+    let contri_amt = term_ui::enter_contribution();
+
     asset.print_all_values();
 
-    rebalance_logic::finance::rebxlance(asset);
+    rebalance_logic::finance::rebxlance(asset, contri_amt);
 
 
     //rebalance_logic::finance::core_logic(text);

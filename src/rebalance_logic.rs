@@ -24,8 +24,64 @@ pub mod finance {
     const GOVERNMENT_SWENSEN: f32 = 15.0;
     const REIT_SWENSEN: f32 = 20.0;
     const EMERGING_SWENSEN: f32 = 5.0;
+    const SECTOR: f32 = 6.0;
 
     use std::collections::HashSet;
+
+    pub struct RebalanceBoard {
+        contribution_amt: f32,
+        amt_domestic: f32,
+        amt_reits: f32,
+        amt_tips: f32,
+        amt_developed: f32,
+        amt_government: f32,
+        amt_emerging: f32,
+    }
+    impl RebalanceBoard {
+        pub fn new() -> RebalanceBoard {
+            RebalanceBoard {
+                contribution_amt: 0.0,
+                amt_domestic: 0.0,
+                amt_reits: 0.0,
+                amt_tips: 0.0,
+                amt_developed: 0.0,
+                amt_government: 0.0,
+                amt_emerging: 0.0,
+            }
+        }
+
+        pub fn custom_new(contribution_amt: f32, amt_domestic: f32, amt_reits: f32, amt_tips: f32, amt_developed: f32, amt_government: f32, amt_emerging: f32) ->RebalanceBoard {
+            RebalanceBoard {
+                contribution_amt,
+                amt_domestic,
+                amt_reits,
+                amt_tips, 
+                amt_developed, 
+                amt_government,
+                amt_emerging,
+            }
+        }
+
+        pub fn change_to(&mut self, location: String, val: f32) {
+            if location == String::from("contribution") {
+                self.contribution_amt = val;
+            } else if location == String::from("domestic") {
+                self.amt_domestic = val;
+            } else if location == String::from("reit") {
+                self.amt_reits = val;
+            } else if location == String::from("tips") {
+                self.amt_tips = val;
+            } else if location == String::from("developed") {
+                self.amt_developed = val;
+            } else if location == String::from("government") {
+                self.amt_government = val;
+            } else if location == String::from("emerging") {
+                self.amt_emerging = val;
+            } else {
+                println!("da fuq is going on");
+            }
+        }
+    }
 
     pub struct AssetAlloc {
         domestic: f32,
@@ -144,6 +200,14 @@ pub mod finance {
 
     }
 
+    fn is_over(percent: f32, swensen_const: f32) -> bool {
+        if percent > swensen_const {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     pub fn core_logic(base_string: String) ->AssetAlloc {
         let base = base_string.clone();
         let mut asset_alloc = AssetAlloc::new();
@@ -165,8 +229,17 @@ pub mod finance {
         return asset_alloc;
     }
 
-    pub fn rebxlance(curr_assets: AssetAlloc) {
+    pub fn rebxlance(curr_assets: AssetAlloc, contri_amt: String) ->RebalanceBoard {
+
+        let mut rebxlance_board = RebalanceBoard::new();
+
         let total = curr_assets.total();
+        let month_money = parsef32name(contri_amt);
+
+        let mut percentage_spread: f32 = 0.0;
+        let mut percentage_for_each: f32 = 0.0;
+        let mut sectors_under = HashSet::new();
+        let mut divvy: f32 = 0.0; // number must start at six because that is the number of sectors
 
         let domestic_percentage = percentage(curr_assets.domestic, total);
         let reits_percentage = percentage(curr_assets.reits, total);
@@ -175,14 +248,41 @@ pub mod finance {
         let government_percentage = percentage(curr_assets.government, total);
         let emerging_percentage = percentage(curr_assets.emerging, total);
 
-        println!("\nPercentage\n");
-        println!("{}", domestic_percentage);
-        println!("{}", reits_percentage);
-        println!("{}", tips_percentage);
-        println!("{}", developed_percentage);
-        println!("{}", government_percentage);
-        println!("{}", emerging_percentage);
-        
+        if is_over(domestic_percentage, DOMESTIC_SWENSEN) {
+            percentage_spread += DOMESTIC_SWENSEN;
+            divvy += 1.0;
+        } else {
+            sectors_under.insert("domestic".to_ascii_uppercase());
+        }
+
+        if is_over(reits_percentage, REIT_SWENSEN) {
+            percentage_spread += REIT_SWENSEN;
+            divvy += 1.0;
+        }
+
+        if is_over(tips_percentage, TIPS_SWENSEN) {
+            percentage_spread += TIPS_SWENSEN;
+            divvy += 1.0;
+        }
+
+        if is_over(developed_percentage, DEVELOPED_SWENSEN) {
+            percentage_spread += DEVELOPED_SWENSEN;
+            divvy += 1.0;
+        }
+
+        if is_over(government_percentage, GOVERNMENT_SWENSEN) {
+            percentage_spread += GOVERNMENT_SWENSEN;
+            divvy += 1.0;
+        }
+
+        if percentage_spread != 0.0 {
+            let to_val = SECTOR - divvy;
+            percentage_for_each += percentage_spread/to_val;
+        }
+
+
+
+        return rebxlance_board;
     }
 
 
