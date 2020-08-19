@@ -34,7 +34,7 @@ pub fn entry() ->String{
 }
 
 pub fn enter_contribution() ->String {
-    println!("Enter contribution amount\n$ ");
+    print!(">$ ");
     let mut amt = String::new();
 
     io::stdin()

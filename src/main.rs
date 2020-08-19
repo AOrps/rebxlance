@@ -27,12 +27,14 @@ fn main() {
 
     let asset = rebalance_logic::finance::core_logic(text);
 
+    println!("Enter contribution amount");
     let contri_amt = term_ui::enter_contribution();
 
     asset.print_all_values();
+    println!("=================================");
 
-    rebalance_logic::finance::rebxlance(asset, contri_amt);
-
+    let rebxlance_assets = rebalance_logic::finance::rebxlance(asset, contri_amt);
+    rebxlance_assets.print_all_values();
 
     //rebalance_logic::finance::core_logic(text);
     // println!("Total = {}",rebalance_logic::finance::total_value(text, true));

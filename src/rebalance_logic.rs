@@ -18,18 +18,25 @@ Emerging - 5%
 
 pub mod finance {
 
-    const DOMESTIC_SWENSEN: f32 = 30.0;
-    const DEVELOPED_SWENSEN: f32 = 15.0;
-    const TIPS_SWENSEN: f32 = 15.0;
-    const GOVERNMENT_SWENSEN: f32 = 15.0;
-    const REIT_SWENSEN: f32 = 20.0;
-    const EMERGING_SWENSEN: f32 = 5.0;
+    // const DOMESTIC_SWENSEN: f32 = 30.0;
+    // const DEVELOPED_SWENSEN: f32 = 15.0;
+    // const TIPS_SWENSEN: f32 = 15.0;
+    // const GOVERNMENT_SWENSEN: f32 = 15.0;
+    // const REIT_SWENSEN: f32 = 20.0;
+    // const EMERGING_SWENSEN: f32 = 5.0;
+    // const SECTOR: f32 = 6.0;
+
+    const DOMESTIC_SWENSEN: f32 = 0.30;
+    const DEVELOPED_SWENSEN: f32 = 0.15;
+    const TIPS_SWENSEN: f32 = 0.15;
+    const GOVERNMENT_SWENSEN: f32 = 0.15;
+    const REIT_SWENSEN: f32 = 0.20;
+    const EMERGING_SWENSEN: f32 = 0.05;
     const SECTOR: f32 = 6.0;
 
     use std::collections::HashSet;
 
     pub struct RebalanceBoard {
-        contribution_amt: f32,
         amt_domestic: f32,
         amt_reits: f32,
         amt_tips: f32,
@@ -40,7 +47,6 @@ pub mod finance {
     impl RebalanceBoard {
         pub fn new() -> RebalanceBoard {
             RebalanceBoard {
-                contribution_amt: 0.0,
                 amt_domestic: 0.0,
                 amt_reits: 0.0,
                 amt_tips: 0.0,
@@ -50,9 +56,8 @@ pub mod finance {
             }
         }
 
-        pub fn custom_new(contribution_amt: f32, amt_domestic: f32, amt_reits: f32, amt_tips: f32, amt_developed: f32, amt_government: f32, amt_emerging: f32) ->RebalanceBoard {
+        pub fn custom_new(amt_domestic: f32, amt_reits: f32, amt_tips: f32, amt_developed: f32, amt_government: f32, amt_emerging: f32) ->RebalanceBoard {
             RebalanceBoard {
-                contribution_amt,
                 amt_domestic,
                 amt_reits,
                 amt_tips, 
@@ -63,9 +68,7 @@ pub mod finance {
         }
 
         pub fn change_to(&mut self, location: String, val: f32) {
-            if location == String::from("contribution") {
-                self.contribution_amt = val;
-            } else if location == String::from("domestic") {
+            if location == String::from("domestic") {
                 self.amt_domestic = val;
             } else if location == String::from("reit") {
                 self.amt_reits = val;
@@ -80,6 +83,15 @@ pub mod finance {
             } else {
                 println!("da fuq is going on");
             }
+        }
+
+        pub fn print_all_values(&self) {
+            println!("Domestic: {:.2}", self.amt_domestic);
+            println!("REIT: {:.2}", self.amt_reits);
+            println!("TIPS: {:.2}", self.amt_tips);
+            println!("Developed: {:.2}", self.amt_developed);
+            println!("Government: {:.2}", self.amt_government);
+            println!("Emerging: {:.2}", self.amt_emerging);
         }
     }
 
@@ -218,7 +230,6 @@ pub mod finance {
             let cost_sector = cost_per_stonk_n_share_amt(String::from(chra));
 
             if !type_sector.is_empty() {
-
                 asset_alloc.add_to(type_sector, cost_sector);
             } else {
                 asset_alloc.add_to("individual".to_owned(), cost_sector);
@@ -237,7 +248,7 @@ pub mod finance {
         let month_money = parsef32name(contri_amt);
 
         let mut percentage_spread: f32 = 0.0;
-        let mut percentage_for_each: f32 = 0.0;
+        let mut percentage_add_for_each: f32 = 0.0;
         let mut sectors_under = HashSet::new();
         let mut divvy: f32 = 0.0; // number must start at six because that is the number of sectors
 
@@ -258,29 +269,53 @@ pub mod finance {
         if is_over(reits_percentage, REIT_SWENSEN) {
             percentage_spread += REIT_SWENSEN;
             divvy += 1.0;
+        } else {
+            sectors_under.insert("reit".to_ascii_lowercase());
         }
 
         if is_over(tips_percentage, TIPS_SWENSEN) {
             percentage_spread += TIPS_SWENSEN;
             divvy += 1.0;
+        } else {
+            sectors_under.insert("tips".to_ascii_lowercase());
         }
 
         if is_over(developed_percentage, DEVELOPED_SWENSEN) {
             percentage_spread += DEVELOPED_SWENSEN;
             divvy += 1.0;
+        } else {
+            sectors_under.insert("developed".to_ascii_lowercase());
         }
 
         if is_over(government_percentage, GOVERNMENT_SWENSEN) {
             percentage_spread += GOVERNMENT_SWENSEN;
             divvy += 1.0;
+        } else {
+            sectors_under.insert("government".to_ascii_lowercase());
+        }
+
+        if is_over(emerging_percentage, EMERGING_SWENSEN) {
+            percentage_spread += EMERGING_SWENSEN;
+            divvy += 1.0;
+        } else {
+            sectors_under.insert("emerging".to_ascii_lowercase());
         }
 
         if percentage_spread != 0.0 {
             let to_val = SECTOR - divvy;
-            percentage_for_each += percentage_spread/to_val;
-        }
+            println!("Divvy {} and to_val = {}", divvy, to_val);
+            percentage_add_for_each += percentage_spread/to_val;
+        } 
 
+        if sectors_under.contains("domestic") { rebxlance_board.change_to(String::from("domestic"), month_money * (DOMESTIC_SWENSEN+percentage_add_for_each));}
+        if sectors_under.contains("reit") { rebxlance_board.change_to(String::from("reit"), month_money * (REIT_SWENSEN+percentage_add_for_each));}
+        if sectors_under.contains("tips") { rebxlance_board.change_to(String::from("tips"), month_money * (TIPS_SWENSEN+percentage_add_for_each));}
+        if sectors_under.contains("developed") { rebxlance_board.change_to(String::from("developed"), month_money * (DEVELOPED_SWENSEN+percentage_add_for_each));}
+        if sectors_under.contains("government") { rebxlance_board.change_to(String::from("government"), month_money * (GOVERNMENT_SWENSEN+percentage_add_for_each));}
+        if sectors_under.contains("emerging") { rebxlance_board.change_to(String::from("emerging"), month_money * (EMERGING_SWENSEN+percentage_add_for_each));}
 
+        println!("Percentage Spread: {}", percentage_add_for_each);
+        
 
         return rebxlance_board;
     }
@@ -324,7 +359,7 @@ pub mod finance {
         .iter().cloned().collect();
 
         let emerging_markets: HashSet<&'static str> = 
-        ["SCHE","ERUS","RSX","RSXJ"]
+        ["SCHE","ERUS","RSX","RSXJ","VWO"]
         .iter().cloned().collect();
 
 
@@ -334,16 +369,16 @@ pub mod finance {
 
 
         let government_bonds: HashSet<&'static str> = 
-        ["EDV","TLT","ZROZ"]
+        ["EDV","TLT","ZROZ","VGIT"]
         .iter().cloned().collect();
 
 
         let tips: HashSet<&'static str> =
-        ["TIPX", "SCHP", "SPIP"]
+        ["TIPX", "SCHP", "SPIP","VTIP"]
         .iter().cloned().collect();
 
         let reits: HashSet<&'static str> = 
-        ["SAFE", "EPRT", "GLPI", "DLR"]
+        ["SAFE", "EPRT", "GLPI", "DLR","VNQ"]
         .iter().cloned().collect();
 
         if domestic_equities.contains(&*stonk) {
