@@ -1,41 +1,28 @@
 // This file has portfolio balancing and dividied yield
-// const REST_API_KEY: &str = "408JLKWT35ALS80X";
-// https://www.alphavantage.co/documentation/
-// ^ doesn't use this shit
 
 /*
-Domestic - 30%
-REITs - 20%
-TIPS - 15%
-Developed_International_Equities - 15%
-Government Bonds - 15%
-Emerging - 5%
+    Domestic - 30%
+    REITs - 20%
+    TIPS - 15%
+    Developed_International_Equities - 15%
+    Government Bonds - 15%
+    Emerging - 5%
 */
 
-#[allow(dead_code)]
-#[allow(unreachable_patterns)]
-#[allow(unused_variables)]
 
 pub mod finance {
 
-    // const DOMESTIC_SWENSEN: f32 = 30.0;
-    // const DEVELOPED_SWENSEN: f32 = 15.0;
-    // const TIPS_SWENSEN: f32 = 15.0;
-    // const GOVERNMENT_SWENSEN: f32 = 15.0;
-    // const REIT_SWENSEN: f32 = 20.0;
-    // const EMERGING_SWENSEN: f32 = 5.0;
-    // const SECTOR: f32 = 6.0;
-
-    const DOMESTIC_SWENSEN: f32 = 0.30;
-    const DEVELOPED_SWENSEN: f32 = 0.15;
-    const TIPS_SWENSEN: f32 = 0.15;
-    const GOVERNMENT_SWENSEN: f32 = 0.15;
-    const REIT_SWENSEN: f32 = 0.20;
-    const EMERGING_SWENSEN: f32 = 0.05;
+    const DOMESTIC_SWENSEN: f32 = 30.0;
+    const DEVELOPED_SWENSEN: f32 = 15.0;
+    const TIPS_SWENSEN: f32 = 15.0;
+    const GOVERNMENT_SWENSEN: f32 = 15.0;
+    const REIT_SWENSEN: f32 = 20.0;
+    const EMERGING_SWENSEN: f32 = 5.0;
     const SECTOR: f32 = 6.0;
 
     use std::collections::HashSet;
 
+    // How stocks should be rebalanced
     pub struct RebalanceBoard {
         amt_domestic: f32,
         amt_reits: f32,
@@ -53,17 +40,6 @@ pub mod finance {
                 amt_developed: 0.0,
                 amt_government: 0.0,
                 amt_emerging: 0.0,
-            }
-        }
-
-        pub fn custom_new(amt_domestic: f32, amt_reits: f32, amt_tips: f32, amt_developed: f32, amt_government: f32, amt_emerging: f32) ->RebalanceBoard {
-            RebalanceBoard {
-                amt_domestic,
-                amt_reits,
-                amt_tips, 
-                amt_developed, 
-                amt_government,
-                amt_emerging,
             }
         }
 
@@ -86,15 +62,22 @@ pub mod finance {
         }
 
         pub fn print_all_values(&self) {
+            println!("");
+            println!("====================================");
+            println!("How Contribution should be allocated");
+            println!("====================================");
             println!("Domestic: {:.2}", self.amt_domestic);
             println!("REIT: {:.2}", self.amt_reits);
             println!("TIPS: {:.2}", self.amt_tips);
             println!("Developed: {:.2}", self.amt_developed);
             println!("Government: {:.2}", self.amt_government);
             println!("Emerging: {:.2}", self.amt_emerging);
+            println!("=================================");
+            println!("");
         }
     }
 
+    // AssetAlloc takes all the values by getting stocks and amt of shares owned 
     pub struct AssetAlloc {
         domestic: f32,
         reits: f32,
@@ -118,6 +101,7 @@ pub mod finance {
             }
         }
 
+        // adds to specific asset in this object
         pub fn add_to(&mut self, location: String, val: f32) {
 
             // println!("loc: {}", location);
@@ -142,7 +126,12 @@ pub mod finance {
 
         } 
 
+        //prints all the values in this object and also the total
         pub fn print_all_values(&self) {
+            println!("");
+            println!("=================================");
+            println!("    Current Value of Assets      ");
+            println!("=================================");
             println!("\tdomestic: {}", self.domestic);
             println!("\treit: {}", self.reits);
             println!("\ttips: {}", self.tips);
@@ -150,16 +139,24 @@ pub mod finance {
             println!("\tgovernment: {}", self.government);
             println!("\temerging: {}", self.emerging);
             println!("\tindividual: {}", self.individual);
+            println!("=================================");
+            println!("Total: {:.2}", self.total());
+            println!("");
         }
 
+        // gets total for this objec
         pub fn total(&self) ->f32 {
+            // n.b. -> says fuck all to individual stocks
+            // doesn't take them into calculation.
             let total: f32 = self.domestic + self.reits + self.tips + self.developed + self.government + self.emerging;
             return total;
         }
 
     }
 
-    
+    // Specific Functions
+
+    // runs a golang Executable to get the price of stock
     pub fn stonk_price_go(stonk: String) ->String{
         // will return the Current Price of the Stock from a Go Script
         let go_script = format!("./stonk {}", stonk);
@@ -184,6 +181,7 @@ pub mod finance {
 
     }
     
+    // calculates the value of the total stock
     fn cost_per_stonk_n_share_amt(indivi: String) ->f32 {
         let mut cost: f32 = 0.0;
 
@@ -201,6 +199,7 @@ pub mod finance {
         return cost;
     }
 
+    // gets the stock name a &str type  
     fn get_stonk_name(small_base: &str) ->String {
         let num = small_base.trim().split('~');
         let dude = num.clone(); 
@@ -212,21 +211,42 @@ pub mod finance {
 
     }
 
+    // determines if sector of assets are over the swensen recommended
     fn is_over(percent: f32, swensen_const: f32) -> bool {
-        if percent > swensen_const {
-            return false;
-        } else {
+        if percent >= swensen_const {
             return true;
+        } else {
+            return false;
         }
     }
 
+    // prints the Domestic, Developed, REITS, TIPS, GOVERNMENT, EMERGING values
+    fn print_curr_percentages(domestic: f32, developed: f32, reits: f32, tips: f32, government: f32, emerging: f32)  {
+        println!("");
+        println!("=================================");
+        println!("   Current Sector Percentages    ");
+        println!("=================================");
+        println!("Domestic: {} %", domestic);
+        println!("REIT: {} %", reits);
+        println!("TIPS: {} %", tips);
+        println!("Developed: {} %", developed);
+        println!("Government: {} %", government);
+        println!("Emerging: {} %", emerging);
+        println!("=================================");
+        println!("");
+    }
+
+    // ----------------------------------------------------------------------------------------
+
+    // Main Core Code
+
+    // parses the base String to get the stonks and amt of shares and will convert to a fully fleshed out AssetAlloc Struct
     pub fn core_logic(base_string: String) ->AssetAlloc {
         let base = base_string.clone();
         let mut asset_alloc = AssetAlloc::new();
 
         for chra in base.split('#') {
             let type_sector = sector_category(&*get_stonk_name(chra));
-            println!("Type sector : {}", type_sector);
             let cost_sector = cost_per_stonk_n_share_amt(String::from(chra));
 
             if !type_sector.is_empty() {
@@ -240,6 +260,8 @@ pub mod finance {
         return asset_alloc;
     }
 
+    // gets AssetAlloc and contribution and recommends where to put the contribution based on the current percentage of the sectors from stock value
+    // ^ I don't even know what this means but it somewhat explains it
     pub fn rebxlance(curr_assets: AssetAlloc, contri_amt: String) ->RebalanceBoard {
 
         let mut rebxlance_board = RebalanceBoard::new();
@@ -259,11 +281,13 @@ pub mod finance {
         let government_percentage = percentage(curr_assets.government, total);
         let emerging_percentage = percentage(curr_assets.emerging, total);
 
+        print_curr_percentages(domestic_percentage, developed_percentage, reits_percentage, tips_percentage, government_percentage, emerging_percentage); // prints current percentages
+
         if is_over(domestic_percentage, DOMESTIC_SWENSEN) {
             percentage_spread += DOMESTIC_SWENSEN;
             divvy += 1.0;
         } else {
-            sectors_under.insert("domestic".to_ascii_uppercase());
+            sectors_under.insert("domestic".to_ascii_lowercase());
         }
 
         if is_over(reits_percentage, REIT_SWENSEN) {
@@ -303,57 +327,53 @@ pub mod finance {
 
         if percentage_spread != 0.0 {
             let to_val = SECTOR - divvy;
-            println!("Divvy {} and to_val = {}", divvy, to_val);
             percentage_add_for_each += percentage_spread/to_val;
-        } 
+        } // responsible for the percentage spread if value is over the recommendation amount
 
-        if sectors_under.contains("domestic") { rebxlance_board.change_to(String::from("domestic"), month_money * (DOMESTIC_SWENSEN+percentage_add_for_each));}
-        if sectors_under.contains("reit") { rebxlance_board.change_to(String::from("reit"), month_money * (REIT_SWENSEN+percentage_add_for_each));}
-        if sectors_under.contains("tips") { rebxlance_board.change_to(String::from("tips"), month_money * (TIPS_SWENSEN+percentage_add_for_each));}
-        if sectors_under.contains("developed") { rebxlance_board.change_to(String::from("developed"), month_money * (DEVELOPED_SWENSEN+percentage_add_for_each));}
-        if sectors_under.contains("government") { rebxlance_board.change_to(String::from("government"), month_money * (GOVERNMENT_SWENSEN+percentage_add_for_each));}
-        if sectors_under.contains("emerging") { rebxlance_board.change_to(String::from("emerging"), month_money * (EMERGING_SWENSEN+percentage_add_for_each));}
 
-        println!("Percentage Spread: {}", percentage_add_for_each);
-        
+        // the /100 is to keep the price at the level it should be --> prints the monetary value
+        if sectors_under.contains("domestic") { rebxlance_board.change_to(String::from("domestic"), (month_money * (DOMESTIC_SWENSEN+percentage_add_for_each))/100.0);}
+        if sectors_under.contains("reit") { rebxlance_board.change_to(String::from("reit"), (month_money * (REIT_SWENSEN+percentage_add_for_each))/100.0);}
+        if sectors_under.contains("tips") { rebxlance_board.change_to(String::from("tips"), (month_money * (TIPS_SWENSEN+percentage_add_for_each))/100.0);}
+        if sectors_under.contains("developed") { rebxlance_board.change_to(String::from("developed"), (month_money * (DEVELOPED_SWENSEN+percentage_add_for_each))/100.0);}
+        if sectors_under.contains("government") { rebxlance_board.change_to(String::from("government"), (month_money * (GOVERNMENT_SWENSEN+percentage_add_for_each))/100.0);}
+        if sectors_under.contains("emerging") { rebxlance_board.change_to(String::from("emerging"), (month_money * (EMERGING_SWENSEN+percentage_add_for_each))/100.0);}        
 
         return rebxlance_board;
     }
 
+    // ----------------------------------------------------------------------------------------
 
+
+    // Helper Functions
+
+    // gets percentage to and sets precision to 2 decimal places
     fn percentage(val: f32, total: f32) ->f32 {
-        // gets percentage to and sets precision to 2 decimal places
         let percent = (val/total) * 100.0; 
         let percent_string = format!("{:.2}", percent); 
         return parsef32name(percent_string);
     }
 
+    // parses String type to an f32 type
     fn parsef32name(f32string: String) ->f32 {
         let new_num: f32 = f32string.trim().parse().unwrap();
         return new_num;
     }
 
+    // parses &str type into an f32 type
     fn parsef32shares(f32shares: &str) ->f32 {
         let n_num = f32shares.parse::<f32>().unwrap();
         return n_num;
     }
 
-    
+    // gets the sector of the particular stonk.
     fn sector_category(stonk: &str) ->String {
         // sector_catergory - takes into consideration index funds (not Individual)
         // will be an empty string if so
         let stonk = String::from(stonk).to_ascii_uppercase();
         let mut sector =  String::new();
 
-        /*
-        Domestic - 30%
-        REITs - 20%
-        TIPS - 15%
-        Developed_International_Equities - 15%
-        Government Bonds - 15%
-        Emerging - 5%
-        */
-
+        // HashSet needed to speed up computation
         let domestic_equities: HashSet<&'static str> = 
         ["SPY", "ITOT", "VTI", "VTSAX", "VOO", "VII", "QQQ", "IWF"]
         .iter().cloned().collect();
@@ -407,5 +427,4 @@ pub mod finance {
 
         return sector;
     }
-
 }
