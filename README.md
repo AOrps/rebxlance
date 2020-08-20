@@ -17,10 +17,13 @@ cargo run
 * Once built you can simply run by going to: **/rebxlance/target/debug/rebxlance** 
 
 ## To Use: 
-| Start Display | Example             | End Result
-|:---------------------| :-----------------------|:------------
-|![](oven/program_start.png)|![](oven/program_mid.png)|![](oven/program_end.png)
+| Start Display             | End Result
+|:---------------------|:------------
+|![](oven/program_start.png)|![](oven/program_end.png)
 
+|Example
+|:----------
+|![](oven/program_mid.png)
 
 |In action:
 |:---------------------
