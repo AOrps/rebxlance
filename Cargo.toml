@@ -1,6 +1,6 @@
 [package]
 name = "rebxlance"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Robert De Niro <dude@perfect.lol>"]
 edition = "2018"
 

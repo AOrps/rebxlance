@@ -1,4 +1,7 @@
 # rebxlance
+
+[![Rust](https://github.com/AOrps/rebxlance/actions/workflows/rust.yml/badge.svg)](https://github.com/AOrps/rebxlance/actions/workflows/rust.yml)
+
 Rust Project with a Golang Mach-o Executable that works in Terminal to do Portfolio Rebalancing. 
 
 ## Technical Details
@@ -6,28 +9,30 @@ Rust Project with a Golang Mach-o Executable that works in Terminal to do Portfo
 * Focused heavily on index stocks.
 * Speed Optimized
 
+## Prior To Run
+
+
 ##  To Run:
-```
+```sh
 git clone https://github.com/AOrps/rebxlance.git
 cd rebxlance
 cargo run 
 ```
-> `cargo run --release` (apparently) builds executable faster
 
 * Once built you can simply run by going to: **/rebxlance/target/debug/rebxlance** 
 
 ## To Use: 
 | Start Display             | End Result
 |:---------------------|:------------
-|![](oven/program_start.png)|![](oven/program_end.png)
+|![](img/program_start.png)|![](img/program_end.png)
 
 |Example
 |:----------
-|![](oven/program_mid.png)
+|![](img/program_mid.png)
 
 |In action:
 |:---------------------
-|![](oven/git_init.gif)
+|![](img/git_init.gif)
 
 ### Disclaimer:
 * I simply piped the executable through lolcat. Text will not show up in rainbow colors.  _It's called style_
