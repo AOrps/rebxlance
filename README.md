@@ -2,12 +2,11 @@
 
 [![Rust](https://github.com/AOrps/rebxlance/actions/workflows/rust.yml/badge.svg)](https://github.com/AOrps/rebxlance/actions/workflows/rust.yml)
 
-Rust Project with a Golang Mach-o Executable that works in Terminal to do Portfolio Rebalancing. 
+Rust Project that works in Terminal to do Portfolio Rebalancing. 
 
 ## Technical Details
 * Uses the Swensen Model for Asset Allocation. 
 * Focused heavily on index stocks.
-* Speed Optimized
 
 ## Prior To Run
 

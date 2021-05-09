@@ -1,8 +1,6 @@
 mod rebalance_logic;
 mod term_ui;
-mod stonk;
-
-#[warn(unused_must_use)]
+mod stock;
 /*
 Uses the Swensen Model for Asset Allocation
 Doesn't have stocks that don't exist and will almost certainly panic and crash.
@@ -21,22 +19,6 @@ eclipse and not do the "smartest rebalancing technique".
 // main just delegates essentially and is a chad
 fn main()  {
    
-    
-    stonk::get_stonk_price();
-
-
-    // -> PyResult<()> {
-    //     let gil = Python::acquire_gil();
-    //     let py = gil.python();
-    
-    //     let locals = [("yfinance", py.import("yfinance")?)].into_py_dict(py);
-    //     let code = "yfinance.Ticker('VEA').info['regularMarketPrice']";
-    //     let user: f32 = py.eval(code,None, Some(&locals))?.extract()?;
-    
-    //     println!("Hello! {}",user);
-    //     Ok(())
-
-
     println!("================================================================");
     println!("Type in Stonk Symbol and Amount of Shares");
     println!("\"> [STOCK_SYM] [AMT_OF_SHARES]\t\"");

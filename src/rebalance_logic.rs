@@ -154,50 +154,8 @@ pub mod finance {
 
     }
 
-    // Specific Functions
+    // Specific Functions    
 
-    // runs a golang Executable to get the price of stock
-    pub fn stonk_price_go(stonk: String) ->String{
-        // will return the Current Price of the Stock from a Go Script
-        let go_script = format!("./stonk {}", stonk);
-        
-        let mut cmd_run = std::process::Command::new("bash");
-        cmd_run.arg("-c")
-                .arg(go_script)
-                .output()
-                .expect("error with go_script within Rust");
-
-
-        match cmd_run.output() {
-            Ok(o) => {
-                unsafe {
-                    return format!("{}", String::from_utf8_unchecked(o.stdout));
-                }
-            }
-            Err(e) => {
-                return format!("NO. There was an error, FuckNut: {}", e);
-            }
-        }
-
-    }
-    
-    // calculates the value of the total stock
-    fn cost_per_stonk_n_share_amt(indivi: String) ->f32 {
-        let mut cost: f32 = 0.0;
-
-        let num = indivi.trim().split("~");
-
-        let follow = num.clone();
-        let vec: Vec<&str> = follow.collect();
-
-        if vec.len() > 1 {
-            let stonk_price = parsef32name(stonk_price_go(String::from(vec[0])));
-            let share_amt: f32 = parsef32shares(vec[1]);
-            cost += stonk_price * share_amt;
-        }
- 
-        return cost;
-    }
 
     // gets the stock name a &str type  
     fn get_stonk_name(small_base: &str) ->String {
@@ -245,16 +203,22 @@ pub mod finance {
         let base = base_string.clone();
         let mut asset_alloc = AssetAlloc::new();
 
+
         for chra in base.split('#') {
-            let type_sector = sector_category(&*get_stonk_name(chra));
-            let cost_sector = cost_per_stonk_n_share_amt(String::from(chra));
 
-            if !type_sector.is_empty() {
-                asset_alloc.add_to(type_sector, cost_sector);
-            } else {
-                asset_alloc.add_to("individual".to_owned(), cost_sector);
+            // There is a blank line that the file takes in, thus it 
+            // needs to check if len() > 0
+            if chra.len() > 0 {
+                let type_sector = sector_category(&*get_stonk_name(chra));
+
+                let cost_sector = crate::stock::stonk::get_stonk_price(get_stonk_name(chra));
+    
+                if !type_sector.is_empty() {
+                    asset_alloc.add_to(type_sector, cost_sector);
+                } else {
+                    asset_alloc.add_to("individual".to_owned(), cost_sector);
+                }
             }
-
         }
 
         return asset_alloc;
@@ -360,11 +324,6 @@ pub mod finance {
         return new_num;
     }
 
-    // parses &str type into an f32 type
-    fn parsef32shares(f32shares: &str) ->f32 {
-        let n_num = f32shares.parse::<f32>().unwrap();
-        return n_num;
-    }
 
     // gets the sector of the particular stonk.
     fn sector_category(stonk: &str) ->String {
