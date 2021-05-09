@@ -155,6 +155,17 @@ pub mod finance {
     }
 
     // Specific Functions    
+    fn get_stonk_amt(small_base: &str) -> f32 {
+        let num = small_base.trim().split('~');
+        let dude = num.clone(); 
+        let vec: Vec<&str> = dude.collect();
+
+        let stonk_amt = vec[1];
+
+        let amt: f32 = stonk_amt.parse::<f32>().unwrap();
+        amt
+        
+    }
 
 
     // gets the stock name a &str type  
@@ -203,15 +214,24 @@ pub mod finance {
         let base = base_string.clone();
         let mut asset_alloc = AssetAlloc::new();
 
-
         for chra in base.split('#') {
 
             // There is a blank line that the file takes in, thus it 
             // needs to check if len() > 0
-            if chra.len() > 0 {
-                let type_sector = sector_category(&*get_stonk_name(chra));
 
-                let cost_sector = crate::stock::stonk::get_stonk_price(get_stonk_name(chra));
+            if chra.len() > 0 {
+
+                let symbol = &*get_stonk_name(chra);
+                let amt = get_stonk_amt(chra);
+                let stock_price = crate::stock::stonk::get_stonk_price(get_stonk_name(chra));
+           
+                let total = amt * stock_price;
+
+                // println!("{}: {} * {} = {}", symbol, stock_price, amt, total);
+
+                let type_sector = sector_category(symbol);
+
+                let cost_sector = total;
     
                 if !type_sector.is_empty() {
                     asset_alloc.add_to(type_sector, cost_sector);

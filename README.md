@@ -8,17 +8,34 @@ Rust Project that works in Terminal to do Portfolio Rebalancing.
 * Uses the Swensen Model for Asset Allocation. 
 * Focused heavily on index stocks.
 
-## Prior To Run
 
-
-##  To Run:
+## To Prepare for use:
 ```sh
+# Getting the repo
 git clone https://github.com/AOrps/rebxlance.git
-cd rebxlance
-cargo run 
+
+# Changing Directory to repo
+cd rebxlance/
+
+# Installing Any Needed 
+make startup
 ```
 
-* Once built you can simply run by going to: **/rebxlance/target/debug/rebxlance** 
+##  To Run:
+* For Debug Mode (Quicker Compilation)
+```sh
+# Cargo Method
+cargo run  
+
+# make Method (just basically calls `$ cargo run`)
+make crun
+
+```
+
+* For Release Mode (Quicker Program (Optimized Executable))
+```sh
+cargo run --release
+```
 
 ## To Use: 
 | Start Display             | End Result
