@@ -78,18 +78,18 @@ pub mod finance {
     }
 
     // AssetAlloc takes all the values by getting stocks and amt of shares owned 
-    pub struct AssetAlloc {
-        domestic: f32,
-        reits: f32,
-        tips: f32,
-        developed: f32,
-        government: f32,
-        emerging: f32,
-        individual: f32,
+    pub struct AssetAlloc<T> {
+        domestic: T,
+        reits: T,
+        tips: T,
+        developed: T,
+        government: T,
+        emerging: T,
+        individual: T,
     }
 
-    impl AssetAlloc {
-        pub fn new() ->AssetAlloc {
+    impl AssetAlloc<f32> {
+        pub fn new() ->AssetAlloc<f32> {
             AssetAlloc {
                 domestic: 0.0,
                 reits: 0.0,
@@ -199,7 +199,7 @@ pub mod finance {
     // Main Core Code
 
     // parses the base String to get the stonks and amt of shares and will convert to a fully fleshed out AssetAlloc Struct
-    pub fn core_logic(base_string: String) ->AssetAlloc {
+    pub fn core_logic(base_string: String) ->AssetAlloc<f32> {
         let base = base_string.clone();
         let mut asset_alloc = AssetAlloc::new();
 
@@ -226,7 +226,7 @@ pub mod finance {
 
     // gets AssetAlloc and contribution and recommends where to put the contribution based on the current percentage of the sectors from stock value
     // ^ I don't even know what this means but it somewhat explains it
-    pub fn rebxlance(curr_assets: AssetAlloc, contri_amt: String) ->RebalanceBoard {
+    pub fn rebxlance(curr_assets: AssetAlloc<f32>, contri_amt: String) ->RebalanceBoard {
 
         let mut rebxlance_board = RebalanceBoard::new();
 
