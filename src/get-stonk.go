@@ -8,7 +8,7 @@ import (
 
 
 func GetPrice(tickler string) float32 {
-	q, err := finance.quote.Get(tickler)
+	q, err := quote.Get(tickler)
 	if err != nil {
 	  // Uh-oh.  
 	  panic(err)
