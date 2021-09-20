@@ -22,19 +22,9 @@ make startup
 ```
 
 ##  To Run:
-* For Debug Mode (Quicker Compilation)
 ```sh
-# Cargo Method
-cargo run  
-
-# make Method (just basically calls `$ cargo run`)
-make crun
-
-```
-
-* For Release Mode (Quicker Program (Optimized Executable))
-```sh
-cargo run --release
+# For Debug Mode (No Compilation)
+go run main.go
 ```
 
 ## To Use: 
@@ -51,7 +41,7 @@ cargo run --release
 |![](img/git_init.gif)
 
 ### Disclaimer:
-* I simply piped the executable through lolcat. Text will not show up in rainbow colors.  _It's called style_
+* I simply piped the executable through lolcat. Text will not show up in rainbow colors.
 
 ## Limitations
 * Does not have all the stocks, it has the base ones. Take a look into the **/src/rebalance_logic.rs** under the sector_category to see which ones the base has. Edit as you see fit. 

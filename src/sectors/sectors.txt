@@ -1,0 +1,18 @@
+// HashSet needed to speed up computation
+domestic_equities = 
+["SPY", "ITOT", "VTI", "VTSAX", "VOO", "VII", "QQQ", "IWF"]
+
+emerging_markets = 
+["SCHE","ERUS","RSX","RSXJ","VWO"]
+
+developed_internationl_equities = 
+["VEA","SCHP","SPDW","GOEA"]
+
+government_bonds = 
+["EDV","TLT","ZROZ","VGIT"]
+
+tips =
+["TIPX", "SCHP", "SPIP","VTIP"]
+
+reits = 
+["SAFE", "EPRT", "GLPI", "DLR","VNQ"]
