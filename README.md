@@ -1,12 +1,6 @@
 # rebxlance
 
-[![Rust](https://github.com/AOrps/rebxlance/actions/workflows/rust.yml/badge.svg)](https://github.com/AOrps/rebxlance/actions/workflows/rust.yml)
-
-Rust Project that works in Terminal to do Portfolio Rebalancing. 
-
-## Technical Details
-* Uses the Swensen Model for Asset Allocation. 
-* Focused heavily on index stocks.
+Portfolio Rebalancing in the Terminal 
 
 
 ## To Prepare for use:
@@ -16,15 +10,15 @@ git clone https://github.com/AOrps/rebxlance.git
 
 # Changing Directory to repo
 cd rebxlance/
-
-# Installing Any Needed 
-make startup
 ```
 
 ##  To Run:
 ```sh
 # For Debug Mode (No Compilation)
 go run main.go
+
+# To Compile
+go build main.go
 ```
 
 ## To Use: 
@@ -44,13 +38,12 @@ go run main.go
 * I simply piped the executable through lolcat. Text will not show up in rainbow colors.
 
 ## Limitations
-* Does not have all the stocks, it has the base ones. Take a look into the **/src/rebalance_logic.rs** under the sector_category to see which ones the base has. Edit as you see fit. 
+* Does not have all the stocks, and the stocks for the sectors is hard-coded for performance reasons. Some code could be considered needlessly repetitive / verbose. 
 
 * Uses a basic portfolio rebalancing technique. It may not yield the top or smartest rebalancing method. **~ Greedy and Simple Approach**
 
-* Optimized for Speed for quick results. Thus code may seem repetitive and verbose. **Better way to code this, for sure**
 
-* Will not even begin to rebalance non-Index ETFs/Stocks. **Use Index _noobs_**
+* Will not even begin to rebalance non-Index ETFs/Stocks. **Use Index**
 
 
 ## Author 
