@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	src.GetSector("AAPL")
+	src.GetSector("VEA")
 	return
 
 	/* Gets all the Args, not including the program name*/

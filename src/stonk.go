@@ -14,7 +14,7 @@ stonk.go is for segmentation of stock in a sector and getting the Price of the S
 type Stonk struct {
 	Name   string
 	Price  float64
-	Sector string
+	Sector Sector
 }
 
 // GenerateStonk() -> Generate a Stonk from name

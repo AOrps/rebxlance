@@ -31,7 +31,6 @@ const ENUMS = 7
 type SectorFunc interface {
 	// Ensure that all the functions are of equal length to (iota) Enums
 	String() string
-	StringSlice() string
 }
 
 // String() -> Enum to String
@@ -55,11 +54,6 @@ func (s Sector) String() string {
 	return "unknown"
 }
 
-// StringSlice() -> Enum to String Slice
-// func (s Sector) StringSlice() string {
-// return [...]string{"domesitc", "emerging", "developed", "government", "tips", "reits", "individual"}[s]
-// }
-
 // readJsonFile() -> reads the HardCoded JSON file and converts it into a
 // map[string][]string i.e a Dictionary that maps a string to a string slice
 func readJsonFile() map[string][]string {
@@ -80,44 +74,40 @@ func readJsonFile() map[string][]string {
 	return result
 }
 
-func GetSector(stonk string) string {
+func GetSector(stonk string) Sector {
 
 	sectorStonkMap := readJsonFile()
 
-	sectors := make(map[string]int8)
+	sectors := make(map[string]Sector)
 	var i int8
-
-	// var wg sync.WaitGroup
-	// wg.Add(ENUMS)
 
 	for i = 0; i < ENUMS; i++ {
 		sector := Sector(i).String()
-		// stocks := readJsonFile(sector)
 		stocks := sectorStonkMap[sector]
 		for _, stock := range stocks {
-			fmt.Println(stock)
-			sectors[stock] = i
+			// fmt.Println(stock)
+			sectors[stock] = Sector(i)
 		}
-
-		// go func(i int8) {
-		// 	defer wg.Done()
-		// 	sector := Sector(i).String()
-		// 	stocks := sectorStonkMap[sector]
-		// 	for _, stock := range stocks {
-		// 		println(stock)
-		// 		sectors <- sectors[stonk] = i
-		// 	}
-		// }(i)
 	}
 
-	fmt.Println(sectors)
-	fmt.Printf(" Length of Sectors %d\n", len(sectors))
+	// fmt.Println(sectors)
+	fmt.Printf("Length of Sectors %d\n", len(sectors))
 
-	for sector := range sectors {
-		fmt.Print(sector)
-		fmt.Print("\t")
-		fmt.Println(sectors[sector])
+	// i = 0
+	// for sector := range sectors {
+	// 	fmt.Print(sector)
+	// 	fmt.Print("\t")
+	// 	fmt.Println(sectors[sector])
+	// 	i++
+	// }
+
+	sector, ok := sectors[stonk]
+
+	fmt.Print(ok)
+
+	if ok {
+		return sector
+	} else {
+		return Sector(6) // Individual
 	}
-
-	return ""
 }
