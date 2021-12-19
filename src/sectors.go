@@ -1,95 +1,82 @@
 package src
 
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
+)
+
 /*
 sectors.go gets the sector of a stock, it is hardcoded rn
 */
 
-// Until Protobuf bugs are dealt with, yes they are gonna be hardcoded into the program
-// Thanks: https://codetree.dev/golang-implementing-sets/
+type Sector int8
 
-type sector map[string]struct{}
+// Enums for all the Sectors
+const (
+	Domesitc Sector = iota 
+	Emerging
+	Developed
+	Government
+	TIPS
+	REITS
+	Individual
+)
 
-func (s sector) add(stonk string) {
-	// For some reason struct{}{} is needed because map needs to map to something
-	// https://levelup.gitconnected.com/memory-allocation-and-performance-in-golang-maps-b267b5ad9217
-	s[stonk] = struct{}{}
+// Ensure that ENUMS is i+1 greater than Sector Enums 
+const ENUMS = 7
+
+
+type SectorFunc interface {
+	// Ensure that all the functions are of equal length to (iota) Enums
+	String() string
+	StringSlice() string
 }
 
-// func (s sector) remove(stonk string) {
-// 	delete(s, stonk)
+// String() -> Enum to String
+func (s Sector) String() string {
+	switch s {
+	case Domesitc:
+		return "domestic"
+	case Emerging:
+		return "emerging"
+	case Developed:
+		return "developed"
+	case Government:
+		return "government"
+	case TIPS:
+		return "tips"
+	case REITS:
+		return "reits"
+	case Individual:
+		return "individual"
+	}
+	return "unknown"
+}
+
+// StringSlice() -> Enum to String Slice
+// func (s Sector) StringSlice() string {
+	// return [...]string{"domesitc", "emerging", "developed", "government", "tips", "reits", "individual"}[s]
 // }
 
-func (s sector) has(stonk string) bool {
-	_, ok := s[stonk]
-	return ok
+func readJsonFile(sector string) {
+	jsonFile, err := os.Open("sectors/sectors.json")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	var result map[string]interface{}
+	json.Unmarshal([]byte(byteValue), &result)
+	fmt.Println(result[sector])
 }
 
 func GetSector(stonk string) string {
-	domestic := sector{}
-
-	domestic.add("SPY")
-	domestic.add("ITOT")
-	domestic.add("VTI")
-	domestic.add("VTSAX")
-	domestic.add("VOO")
-	domestic.add("VII")
-	domestic.add("QQQ")
-	domestic.add("IWF")
-
-	emerging := sector{}
-
-	emerging.add("SCHE")
-	emerging.add("ERUS")
-	emerging.add("RSX")
-	emerging.add("RSXJ")
-	emerging.add("VWO")
-
-	developed := sector{}
-
-	developed.add("VEA")
-	developed.add("SCHP")
-	developed.add("SPDW")
-	developed.add("GOEA")
-
-	government := sector{}
-
-	government.add("EDV")
-	government.add("TLT")
-	government.add("ZROZ")
-	government.add("VGIT")
-
-	tips := sector{}
-
-	tips.add("TIPX")
-	tips.add("SCHP")
-	tips.add("SPIP")
-	tips.add("VTIP")
-
-	reits := sector{}
-
-	reits.add("SAFE")
-	reits.add("EPRT")
-	reits.add("GLPI")
-	reits.add("DLR")
-	reits.add("VNQ")
-
-	// domestic, emerging, developed, government, tips, reits
-
-	switch {
-	case domestic.has(stonk):
-		return "domestic"
-	case emerging.has(stonk):
-		return "emerging"
-	case developed.has(stonk):
-		return "developed"
-	case government.has(stonk):
-		return "government"
-	case tips.has(stonk):
-		return "tips"
-	case reits.has(stonk):
-		return "reits"
-	default:
-		return "individual"
-	}
-
+	i := const ( iota )
 }

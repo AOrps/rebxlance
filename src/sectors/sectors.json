@@ -1,5 +1,5 @@
 {
-    "domestic_equities": [
+    "domestic": [
         "SPY",
         "ITOT",
         "VTI",
@@ -9,20 +9,20 @@
         "QQQ",
         "IWF"
     ],
-    "emerging_markets": [
+    "emerging": [
         "SCHE",
         "ERUS",
         "RSX",
         "RSXJ",
         "VWO"
     ],
-    "developed_internationl_equities": [
+    "developed": [
         "VEA",
         "SCHP",
         "SPDW",
         "GOEA"
     ],
-    "government_bonds": [
+    "government": [
         "EDV",
         "TLT",
         "ZROZ",

@@ -10,6 +10,8 @@ import (
 
 func main() {
 
+	src.ReadJsonFile()
+
 	/* Gets all the Args, not including the program name*/
 	parameters := os.Args[1:]
 
