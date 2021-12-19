@@ -1,7 +1,6 @@
+[![Go](https://github.com/AOrps/rebxlance/actions/workflows/go.yml/badge.svg)](https://github.com/AOrps/rebxlance/actions/workflows/go.yml)
 # rebxlance
-
-Portfolio Rebalancing in the Terminal 
-
+Rebalance Portfolio
 
 ## To Prepare for use:
 ```sh
@@ -22,29 +21,8 @@ go build main.go
 ```
 
 ## To Use: 
-| Start Display             | End Result
-|:---------------------|:------------
-|![](img/program_start.png)|![](img/program_end.png)
-
-|Example
-|:----------
-|![](img/program_mid.png)
-
-|In action:
-|:---------------------
-|![](img/git_init.gif)
 
 ### Disclaimer:
-* I simply piped the executable through lolcat. Text will not show up in rainbow colors.
+- This is not to be a replacement or a substitute for investment advice,
 
 ## Limitations
-* Does not have all the stocks, and the stocks for the sectors is hard-coded for performance reasons. Some code could be considered needlessly repetitive / verbose. 
-
-* Uses a basic portfolio rebalancing technique. It may not yield the top or smartest rebalancing method. **~ Greedy and Simple Approach**
-
-
-* Will not even begin to rebalance non-Index ETFs/Stocks. **Use Index**
-
-
-## Author 
-* AOrps

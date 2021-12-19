@@ -1,7 +1,7 @@
 package src
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/piquette/finance-go/quote"
 )
@@ -16,12 +16,12 @@ type Stonk struct {
 	Sector string
 }
 
-func GenerateStonk(name string) Stonk {
+func GenerateStonk(name string) (Stonk, error) {
 	return Stonk{
 		Name:   name,
 		Price:  GetMarketPrice(name),
 		Sector: GetSector(name),
-	}
+	}, nil
 }
 
 // GetMarketPrice() -> Get's current price of stocks
@@ -29,8 +29,10 @@ func GetMarketPrice(stonk string) float64 {
 	q, err := quote.Get(stonk)
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
+
+	// return float64(0)
 
 	// Gets 'Regular market Price'
 	price := q.RegularMarketPrice

@@ -33,7 +33,9 @@ func main() {
 		if len(text) == 0 {
 			break
 		}
-		Stonks = append(Stonks, src.GenerateStonk(text))
+		price := src.GetMarketPrice(text)
+		fmt.Println(price)
+		// Stonks = append(Stonks, src.GenerateStonk(text))
 	}
 
 	fmt.Println("===============================================================")
