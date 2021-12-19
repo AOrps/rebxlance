@@ -10,7 +10,8 @@ import (
 
 func main() {
 
-	src.ReadJsonFile()
+	src.GetSector("AAPL")
+	return
 
 	/* Gets all the Args, not including the program name*/
 	parameters := os.Args[1:]

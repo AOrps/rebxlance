@@ -15,3 +15,12 @@ func (s Set) has(stonk string) bool {
 	_, ok := s[stonk]
 	return ok
 }
+
+type DictSet map[string]Set
+
+type DictSetFunc interface {
+	add(string)
+	contains(string)
+}
+
+// func (ds DictSet) add(stonk string)

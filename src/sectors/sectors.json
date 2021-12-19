@@ -40,5 +40,8 @@
         "GLPI",
         "DLR",
         "VNQ"
+    ],
+    "individual": [
+        "MSFT"
     ]
 }
