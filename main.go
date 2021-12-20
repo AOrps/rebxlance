@@ -10,9 +10,6 @@ import (
 
 func main() {
 
-	src.GetSector("VEA")
-	return
-
 	/* Gets all the Args, not including the program name*/
 	parameters := os.Args[1:]
 
@@ -38,7 +35,12 @@ func main() {
 		}
 		price := src.GetMarketPrice(text)
 		fmt.Println(price)
-		// Stonks = append(Stonks, src.GenerateStonk(text))
+		// stonk, err := src.GenerateStonk(text)
+		// if err != nil {
+		// 	fmt.Println(err)
+		// } else {
+		// 	Stonks = append(Stonks, stonk)
+		// }
 	}
 
 	fmt.Println("===============================================================")
