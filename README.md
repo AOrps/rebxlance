@@ -2,7 +2,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/AOrps/rebxlance)](https://goreportcard.com/report/github.com/AOrps/rebxlance)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4e5372c279e42457ecfb/maintainability)](https://codeclimate.com/github/AOrps/rebxlance/maintainability)
-<!-- TODO: Travis-CI (maybe) -->
 # rebxlance
 Rebalance Portfolio
 

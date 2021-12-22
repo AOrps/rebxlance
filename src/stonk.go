@@ -33,21 +33,19 @@ func GenerateStonk(name string) (Stonk, error) {
 
 // GetMarketPrice() -> Get's current price of stocks
 func GetMarketPrice(stonk string) float32 {
-	var price float32
 	q, err := quote.Get(stonk)
+
+	// Catches err (but I don't think piquette-go does a good job in handling errors)
 	if err != nil {
 		fmt.Println(err)
+		return float32(0)
 	}
 
-	// TODO: Try and Catch or Error Handle the weird nil pointer error when accessing the .RegularMarketPrice
-	// Maybe: https://stackoverflow.com/questions/52827318/can-i-get-whether-a-field-has-been-assigned-with-reflection-in-golang
+	// if stonk doesn't exist return 0
+	if q == nil {
+		return float32(0)
+	}
 
 	// Gets 'Regular market Price'
-	if !(q.RegularMarketPrice > float64(0)) {
-		price = float32(0)
-	}
-
-	price = float32(q.RegularMarketPrice)
-
-	return price
+	return float32(q.RegularMarketPrice)
 }

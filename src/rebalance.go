@@ -4,6 +4,25 @@ package src
 rebalance.go is meant to help with Portfolio Rebalancing
 */
 
-// func generic_rebalance() {
+type Portfolio struct {
+	Stocks []Stonk
+}
 
-// }
+// Rebalance() ->
+func Rebalance() {
+	// optimal rebalance
+	optimal()
+
+	// simple rebalance
+	simple()
+}
+
+// optimal() ->
+func optimal() {
+
+}
+
+// simple() ->
+func simple() {
+
+}

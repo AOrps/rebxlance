@@ -10,6 +10,8 @@ import (
 
 func main() {
 
+	// gui.MAIN()
+
 	/* Gets all the Args, not including the program name*/
 	parameters := os.Args[1:]
 
@@ -35,12 +37,12 @@ func main() {
 		}
 		price := src.GetMarketPrice(text)
 		fmt.Println(price)
-		// stonk, err := src.GenerateStonk(text)
-		// if err != nil {
-		// 	fmt.Println(err)
-		// } else {
-		// 	Stonks = append(Stonks, stonk)
-		// }
+		stonk, err := src.GenerateStonk(text)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			Stonks = append(Stonks, stonk)
+		}
 	}
 
 	fmt.Println("===============================================================")
