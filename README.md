@@ -2,11 +2,12 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/AOrps/rebxlance)](https://goreportcard.com/report/github.com/AOrps/rebxlance)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4e5372c279e42457ecfb/maintainability)](https://codeclimate.com/github/AOrps/rebxlance/maintainability)
+[![](https://img.shields.io/badge/Layout-Go%20Standard-informational)](https://github.com/golang-standards/project-layout)
 # rebxlance
 <!-- rebxlance logo -->
 
 ## :memo: Description
-- desc
+- Program that helps me calculate my investments using a simple form of swensen method of asset allocation!
 
 ## :microscope: Technologies
 - **Languages**: `go`
