@@ -1,0 +1,47 @@
+{
+    "domestic": [
+        "SPY",
+        "ITOT",
+        "VTI",
+        "VTSAX",
+        "VOO",
+        "VII",
+        "QQQ",
+        "IWF"
+    ],
+    "emerging": [
+        "SCHE",
+        "ERUS",
+        "RSX",
+        "RSXJ",
+        "VWO"
+    ],
+    "developed": [
+        "VEA",
+        "SCHP",
+        "SPDW",
+        "GOEA"
+    ],
+    "government": [
+        "EDV",
+        "TLT",
+        "ZROZ",
+        "VGIT"
+    ],
+    "tips": [
+        "TIPX",
+        "SCHP",
+        "SPIP",
+        "VTIP"
+    ],
+    "reits": [
+        "SAFE",
+        "EPRT",
+        "GLPI",
+        "DLR",
+        "VNQ"
+    ],
+    "individual": [
+        "MSFT"
+    ]
+}

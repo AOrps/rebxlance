@@ -21,3 +21,8 @@
 go.work
 
 # Custom Ignores
+
+# Output program
+main.o
+
+cmd/db.json

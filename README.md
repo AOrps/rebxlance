@@ -3,29 +3,35 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4e5372c279e42457ecfb/maintainability)](https://codeclimate.com/github/AOrps/rebxlance/maintainability)
 # rebxlance
-Rebalance Portfolio
+<!-- rebxlance logo -->
 
-## To Prepare for use:
+## :memo: Description
+- desc
+
+## :microscope: Technologies
+- **Languages**: `go`
+
+## :hammer: How to Build
+### Prepare to use
 ```sh
 # Getting the repo
 git clone https://github.com/AOrps/rebxlance.git
 
 # Changing Directory to repo
 cd rebxlance/
+
+# To Compile program
+make
 ```
 
-##  To Run:
+## :alembic: Usage
 ```sh
-# For Debug Mode (No Compilation)
-go run main.go
+# To Run (if compiled)
+./main.o
 
-# To Compile
-go build main.go
+# For Direct Compile to Run
+make run
 ```
 
-## To Use: 
-
-### Disclaimer:
-- This is not to be a replacement or a substitute for investment advice,
-
-## Limitations
+## :warning: Disclaimer
+- This is not to be a replacement or a substitute for investment advice. 
