@@ -57,7 +57,7 @@ func (s Sector) String() string {
 // map[string][]string i.e a Dictionary that maps a string to a string slice
 func readJsonFile() map[string][]string {
 	// TODO: Make url anchored
-	jsonFile, err := os.Open("src/sectors/sectors.json")
+	jsonFile, err := os.Open("api/sectors.json")
 	if err != nil {
 		log.Fatal(err)
 	}
