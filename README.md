@@ -9,8 +9,11 @@
 ## :memo: Description
 - Program that helps me calculate my investments using a simple form of swensen method of asset allocation!
 
-## :microscope: Technologies
-- **Languages**: `go`
+## :mag: Manual
+
+```txt
+
+```
 
 ## :hammer: How to Build
 ### Prepare to use
@@ -34,5 +37,18 @@ make
 make run
 ```
 
+---
+
+## :framed_picture: Screenshots / Images
+
+## :card_file_box: Directory Explanation
+
+| Directory | Explanation
+| :-------: | :---------
+|           | 
+
 ## :warning: Disclaimer
 - This is not to be a replacement or a substitute for investment advice. 
+
+
+## :warning: Disclaimer

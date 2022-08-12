@@ -25,4 +25,5 @@ go.work
 # Output program
 main.o
 
+cmd/db*
 cmd/db.json
