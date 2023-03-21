@@ -8,7 +8,7 @@
 
 ## :memo: Description
 - Program that helps me calculate my investments using a simple form of swensen method of asset allocation!
-
+Directory
 ## :mag: Manual
 
 ```txt
@@ -52,3 +52,4 @@ make run
 
 
 ## :warning: Disclaimer
+Disclaimer
