@@ -1,0 +1,12 @@
+# Variables
+COMPILER = go
+
+# Build rules
+rule build
+  command = $COMPILER build -o $out $in
+
+# Build targets
+build rebxlance: build main.go
+
+# Default
+default rebxlance
