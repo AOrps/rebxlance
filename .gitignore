@@ -1,3 +1,9 @@
-/target
+# Files
 .text
+*~
+.env
+
+# Directories
+/target
 /advice_future
+
