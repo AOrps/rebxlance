@@ -1,11 +1,13 @@
 package main
 
 import (
-	"bufio"
+	//	"bufio"
 	"fmt"
-	"os"
+	//	"os"
+	"github.com/piquette/finance-go/quote"
+	"log"
 
-	"github.com/AOrps/rebxlance/pkg"
+	//	"github.com/AOrps/rebxlance/portfolio"
 )
 
 const (
@@ -13,7 +15,18 @@ const (
 )
 
 func main() {
-	var Stonks []pkg.Stonk
+	q, err := quote.Get("AAPL")
+
+	if err != nil {
+		fmt.Println("fucking error")
+		log.Fatal(err)
+	}
+	
+	fmt.Println(q)
+	/*
+	var Stonks []portfolio.Stonk
+
+
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for {
@@ -26,9 +39,9 @@ func main() {
 			break
 		}
 
-		price := pkg.GetMarketPrice(text)
+		price := portfolio.GetMarketPrice(text)
 		fmt.Println(price)
-		stonk, err := pkg.GenerateStonk(text)
+		stonk, err := portfolio.GenerateStonk(text)
 
 		if err != nil {
 			fmt.Println(err)
@@ -42,5 +55,5 @@ func main() {
 		fmt.Printf("Name:%s\nPrice:%f\nSector:%s\n\n", stonk.Name, stonk.Price, stonk.Sector)
 	}
 	fmt.Println("===============================================================")
-
+	*/
 }

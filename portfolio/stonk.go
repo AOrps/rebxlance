@@ -1,4 +1,4 @@
-package pkg
+package portfolio
 
 import (
 	"errors"
@@ -7,16 +7,22 @@ import (
 	"github.com/piquette/finance-go/quote"
 )
 
-/*
-stonk.go is for segmentation of stock in a sector and getting the Price of the Stonks
-*/
-
 // Stonk:
 type Stonk struct {
 	Name   string
 	Price  float32
 	Sector Sector
 }
+
+type SectorBase map[Sector][]Stonk
+
+type Tranche struct {
+	SectorBase
+	Percentage float32
+}
+
+type Portfolio []Tranche
+	
 
 // GenerateStonk() -> Generate a Stonk from name
 func GenerateStonk(name string) (Stonk, error) {
@@ -29,6 +35,10 @@ func GenerateStonk(name string) (Stonk, error) {
 		Price:  GetMarketPrice(name),
 		Sector: GetSector(name),
 	}, nil
+}
+
+func (s *Stonk) Reblance() {
+	fmt.Println("hi")
 }
 
 // GetMarketPrice() -> Get's current price of stocks

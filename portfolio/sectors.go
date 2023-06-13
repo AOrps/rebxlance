@@ -1,4 +1,4 @@
-package pkg
+package portfolio
 
 import (
 	"encoding/json"
