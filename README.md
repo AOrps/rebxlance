@@ -45,10 +45,7 @@ make run
 
 | Directory | Explanation
 | :-------: | :---------
-|    asdfbasjhdf       |  lasndfaksdnfsadfkn 
-| asdasdfasfd | asldflsakdfns'
-| asldnfsaldfn | [dasjfnkjsadnf](./Makefile)
-| # Start Here | Not here 
+|  | 
 
 
 ## :warning: Disclaimer
