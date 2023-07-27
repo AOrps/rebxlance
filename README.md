@@ -1,4 +1,4 @@
-[![Go](https://github.com/AOrps/rebxlance/actions/workflows/go.yml/badge.svg)](https://github.com/AOrps/rebxlance/actions/workflows/go.yml)
+n[![Go](https://github.com/AOrps/rebxlance/actions/workflows/go.yml/badge.svg)](https://github.com/AOrps/rebxlance/actions/workflows/go.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/AOrps/rebxlance)](https://goreportcard.com/report/github.com/AOrps/rebxlance)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4e5372c279e42457ecfb/maintainability)](https://codeclimate.com/github/AOrps/rebxlance/maintainability)
@@ -45,7 +45,11 @@ make run
 
 | Directory | Explanation
 | :-------: | :---------
-|           | 
+|    asdfbasjhdf       |  lasndfaksdnfsadfkn 
+| asdasdfasfd | asldflsakdfns'
+| asldnfsaldfn | [dasjfnkjsadnf](./Makefile)
+
+
 
 ## :warning: Disclaimer
 - This is not to be a replacement or a substitute for investment advice. 
