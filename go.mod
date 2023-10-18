@@ -1,11 +1,7 @@
 module github.com/AOrps/rebxlance
 
-go 1.19
+go 1.21.2
 
-require github.com/piquette/finance-go v1.0.0
+require github.com/piquette/finance-go v1.1.0
 
-require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/shopspring/decimal v1.2.0 // indirect
-	github.com/stretchr/testify v1.7.0 // indirect
-)
+require github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24 // indirect
