@@ -1,6 +1,13 @@
 package main
 
 // https://www.stockdata.org/documentation
+import (
+	"bufio"
+	"os"
+	"fmt"
+	// "github.com/AOrps/rebxlance/portfolio"
+)
+
 
 const (
 	JSONDB = "cmd/db.json"
@@ -8,33 +15,40 @@ const (
 
 func main() {
 
+
 	scanner := bufio.NewScanner(os.Stdin)
 
-	for {
-		fmt.Print("> ")
-		scanner.Scan()
-		rawText := scanner.Text()
-		text := rawText
+	fmt.Print("> ")
+	scanner.Scan()
 
-		if len(text) == 0 {
-			break
-		}
+	rawText := scanner.Text()
+	
+	fmt.Printf("[%s]\n", rawText)
+	// for {
+	// 	fmt.Print("> ")
+	// 	scanner.Scan()
+	// 	rawText := scanner.Text()
+	// 	text := rawText
 
-		// price := portfolio.GetMarketPrice(text)
-		// fmt.Println(price)
-		// stonk, err := portfolio.GenerateStonk(text)
+	// 	if len(text) == 0 {
+	// 		break
+	// 	}
+
+	// 	// price := portfolio.GetMarketPrice(text)
+	// 	// fmt.Println(price)
+	// 	// stonk, err := portfolio.GenerateStonk(text)
  
-		if err != nil {
-			fmt.Println(err)
-		} else {
-			Stonks = append(Stonks, stonk)
-		}
-	}
+	// 	if err != nil {
+	// 		fmt.Println(err)
+	// 	} else {
+	// 		Stonks = append(Stonks, stonk)
+	// 	}
+	// }
 
-	fmt.Println("===============================================================")
-	for _, stonk := range Stonks {
-		fmt.Printf("Name:%s\nPrice:%f\nSector:%s\n\n", stonk.Name, stonk.Price, stonk.Sector)
-	}
-	fmt.Println("===============================================================")
+	// fmt.Println("===============================================================")
+	// for _, stonk := range Stonks {
+	// 	fmt.Printf("Name:%s\nPrice:%f\nSector:%s\n\n", stonk.Name, stonk.Price, stonk.Sector)
+	// }
+	// fmt.Println("===============================================================")
 
 }

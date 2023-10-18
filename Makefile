@@ -1,14 +1,25 @@
-OUTPUT=main.o
+SHELL = /bin/sh
+OUTPUT = rebxlance
 
 all: compile
 
-compile: clean
+compile:
+	@echo "=========== BUILD ==========="
+	go build
+
+legacy-compile: clean
 	@go build -o $(OUTPUT) main.go
 
 run: compile
-	@./$(OUTPUT)
+	@echo "============ RUN ============"
+	echo -n "Running... "
+	./$(OUTPUT)
 
 clean:
-ifneq (,$(wilcard ./$(OUTPUT)))
-	@rm ./$(OUTPUT)
+	@echo "=========== CLEAN ==========="
+ifneq (,$(wildcard ./$(OUTPUT)))
+	rm ./$(OUTPUT)
+endif
+ifneq (,$(wildcard ./*.o))
+	rm ./*.o
 endif
