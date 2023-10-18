@@ -8,7 +8,7 @@
 
 ## :memo: Description
 - Program that helps me calculate my investments using a simple form of swensen method of asset allocation!
-Directory
+
 ## :mag: Manual
 
 ```txt
@@ -31,7 +31,7 @@ make
 ## :alembic: Usage
 ```sh
 # To Run (if compiled)
-./main.o
+./rebxlance
 
 # For Direct Compile to Run
 make run
@@ -50,7 +50,3 @@ make run
 
 ## :warning: Disclaimer
 - This is not to be a replacement or a substitute for investment advice. 
-
-
-## :warning: Disclaimer
-Disclaimer
