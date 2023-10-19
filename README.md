@@ -1,3 +1,5 @@
+# :warning: CANNOT USE THIS REPO BECAUSE UNDERLYING API FUNCTIONALITY HAS BEEN DAMAGED
+
 [![Go](https://github.com/AOrps/rebxlance/actions/workflows/go.yml/badge.svg)](https://github.com/AOrps/rebxlance/actions/workflows/go.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/AOrps/rebxlance)](https://goreportcard.com/report/github.com/AOrps/rebxlance)
 ![License](https://img.shields.io/github/license/AOrps/rebxlance)
